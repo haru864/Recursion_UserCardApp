@@ -52,7 +52,6 @@ class EmotionObject {
     }
 }
 
-//グローバル定数
 const dictionary = {
     "bark": "the sound made by a dog",
     "grunt": "issue a low, animal-like noise",
@@ -109,6 +108,16 @@ const pictureDictionary = {
     "zing": "https://cdn.pixabay.com/photo/2017/09/14/16/38/fiber-optic-2749588_1280.jpg"
 };
 
+const emotionIconDictionary = {
+    "angry": "😠",
+    "happy": "🥳",
+    "bad": "😰",
+    "sad": "🥺",
+    "surprised": "😲",
+    "fearful": "😖",
+    "disgusted": "😒"
+}
+
 const emotions = [
     new EmotionObject("angry", "feeling or showing strong annoyance, displeasure, or hostility; full of anger.", "red", ["bark", "grunt", "roar", "whack", "smack", "hiss"]),
     new EmotionObject("happy", "feeling or showing pleasure or contentment.", "yellow", ["bling", "chatter", "chant", "giggle"]),
@@ -123,6 +132,21 @@ let target = document.getElementById("target");
 
 let panels = document.createElement("div");
 panels.classList.add("container", "d-flex", "justify-content-center", "flex-wrap");
+for (let i = 0; i < emotions.length; i++) {
+    let a = document.createElement("a");
+    a.href = "#" + emotions[i].emotion;
+    a.classList.add("expandLink", "col-12", "col-md-6", "col-lg-3", "p-4", "m-4", "text-center");
+    a.style.background = emotions[i].color;
+    let panel = document.createElement("div");
+    // panel.classList.add("expandLink", "col-12", "col-md-6", "col-lg-3", "p-4", "m-4", "text-center");
+    // panel.style.background = emotions[i].color;
+    // panel.innerHTML = `<a href="#${emotions[i].emotion}"></a>`;
+    panel.innerHTML += `<h3 class="text-white">${emotions[i].emotion}</h3>`;
+    panel.innerHTML += `<h1>${emotionIconDictionary[emotions[i].emotion]}</h1>`;
+    panel.innerHTML += `<p class="text-white">${emotions[i].description}</p>`;
+    a.append(panel);
+    panels.append(a);
+}
 
 let cards = document.createElement("div");
 for (let i = 0; i < emotions.length; i++) {
